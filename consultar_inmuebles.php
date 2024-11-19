@@ -1,5 +1,5 @@
 <?php
-include_once "config.php";
+include_once "connection.php";
 // Simple query to fetch data from a table
 $query = $pdo->query("SELECT * FROM inmueble");
 

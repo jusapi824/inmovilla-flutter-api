@@ -1,22 +1,27 @@
 <?php
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+require __DIR__ . '/vendor/autoload.php'; // Asegúrate de que la ruta sea correcta
+use Dotenv\Dotenv;
 
-//$bd = "inmovilla_flutter";
-//$server = "localhost";
-$bd = "sena";
-$server = "sena_inmovilla-flutter-mysql";//46.202.92.226
-$dsn = "mysql:host=$server;dbname=$bd";
-// $user = 'root'; 
-// $password = ''; // "ee19d655f1934da88398"
-$user = 'mysql';
-$password = 'ee19d655f1934da88398'; 
+// Cargar variables de entorno desde el archivo .env
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-try {
-    $pdo = new PDO($dsn, $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //echo "Conexión exitosa";
-} catch (PDOException $e) {
-    echo "Conexión fallida: " . $e->getMessage();
-}
+// Obtener el entorno actual
+$appEnv = $_ENV['APP_ENV'] ?: 'local';
 
+// Configuración según el entorno
+$config = [
+    'app_env' => $appEnv,
+    'app_debug' => $_ENV['APP_DEBUG'] === 'true',
+    'db' => [
+        'host' => $_ENV['DB_HOST'],
+        'port' => $_ENV['DB_PORT'],
+        'database' => $_ENV['DB_DATABASE'],
+        'username' => $_ENV['DB_USERNAME'],
+        'password' => $_ENV['DB_PASSWORD'],
+    ],
+];
 
-?>
+return $config;
