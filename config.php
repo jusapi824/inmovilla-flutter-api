@@ -3,7 +3,7 @@
 //$bd = "inmovilla_flutter";
 //$server = "localhost";
 $bd = "sena";
-$server = "localhost";//46.202.92.226
+$server = "sena_inmovilla-flutter-mysql";//46.202.92.226
 $dsn = "mysql:host=$server;dbname=$bd";
 // $user = 'root'; 
 // $password = ''; // "ee19d655f1934da88398"
