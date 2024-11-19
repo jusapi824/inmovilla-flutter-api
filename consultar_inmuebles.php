@@ -9,6 +9,11 @@ while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
     // echo "ID: " . $row['id'] . " - codigoVivienda: " . $row['codigoVivienda'] . " - Título: " . $row['titulo'] . " - Descripción: " . $row['descripcion'] . "<br>";
 }
 
+
+
 // Return the results as a JSON object
 header('Content-Type: application/json');
 echo json_encode($results);
+
+// Close the connection
+$pdo = null;

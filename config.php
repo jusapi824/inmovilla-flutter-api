@@ -1,10 +1,14 @@
 <?php
 
-$bd = "inmovilla_flutter";
-$server = "localhost";//46.202.92.226
+//$bd = "inmovilla_flutter";
+//$server = "localhost";
+$bd = "sena";
+$server = "46.202.92.226";
 $dsn = "mysql:host=$server;dbname=$bd";
-$user = 'root'; //mysql
-$password = ''; // "ee19d655f1934da88398"
+// $user = 'root'; 
+// $password = ''; // "ee19d655f1934da88398"
+$user = 'mysql';
+$password = 'ee19d655f1934da88398'; 
 
 try {
     $pdo = new PDO($dsn, $user, $password);
