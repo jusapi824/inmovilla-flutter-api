@@ -16,7 +16,8 @@ try {
     $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : '';
 
 
-    if ($id > 0 && !empty($codigoVivienda) && !empty($titulo) && !empty($descripcion) && !empty($direccion) && $precio > 0 && $cantidadCuartos > 0 && $area > 0) {
+    // if ($id > 0 && !empty($codigoVivienda) && !empty($titulo) && !empty($descripcion) && !empty($direccion) && $precio > 0 && $cantidadCuartos > 0 && $area > 0) {
+    if ($id > 0) {
         // Consulta para actualizar un inmueble existente
         $stmt = $pdo->prepare("UPDATE inmueble SET codigoVivienda = :codigoVivienda, titulo = :titulo, descripcion = :descripcion, direccion = :direccion, precio = :precio, cantidadCuartos = :cantidadCuartos, tieneBanio = :tieneBanio, area = :area, imagen = :imagen WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
