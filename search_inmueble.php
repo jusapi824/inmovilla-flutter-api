@@ -1,4 +1,5 @@
 <?php
+include_once "cors.php";
 include_once "connection.php";
 
 $inmuebleId = isset($_GET['id']) ? intval($_GET['id']) : 0;

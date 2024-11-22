@@ -1,4 +1,5 @@
 <?php
+include_once "cors.php";
 include_once "connection.php";
 
 $codigoVivienda = isset($_POST['codigoVivienda']) ? $_POST['codigoVivienda'] : '';
@@ -12,7 +13,8 @@ $area = isset($_POST['area']) ? floatval($_POST['area']) : 0;
 $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : '';
 
 
-if (!empty($codigoVivienda) && !empty($titulo) && !empty($descripcion) && !empty($direccion) && $precio > 0 && $cantidadCuartos > 0 && $area > 0) {
+// if (!empty($codigoVivienda) && !empty($titulo) && !empty($descripcion) && !empty($direccion) && $precio > 0 && $cantidadCuartos > 0 && $area > 0) {
+if (!empty($codigoVivienda) && !empty($titulo)) {
     // Consulta para insertar un nuevo inmueble
     $stmt = $pdo->prepare("INSERT INTO inmueble (codigoVivienda, titulo, descripcion, direccion, precio, cantidadCuartos, tieneBanio, area, imagen) VALUES (:codigoVivienda, :titulo, :descripcion, :direccion, :precio, :cantidadCuartos, :tieneBanio, :area, :imagen)");
     $stmt->bindParam(':codigoVivienda', $codigoVivienda);
@@ -28,7 +30,12 @@ if (!empty($codigoVivienda) && !empty($titulo) && !empty($descripcion) && !empty
 
     // Verificar si se insertó alguna fila
     if ($stmt->rowCount() > 0) {
-        $response = ['success' => true, 'message' => 'Inmueble insertado correctamente'];
+        $query = $pdo->query("SELECT * FROM inmueble ORDER BY id DESC");
+        $results = [];
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $results[] = $row;
+        }
+        $response = ['success' => true, 'message' => 'Inmueble insertado correctamente', 'data'=> $results ];
     } else {
         $response = ['success' => false, 'message' => 'No se pudo insertar el inmueble'];
     }
@@ -42,4 +49,3 @@ echo json_encode($response);
 
 // Cerrar la conexión
 $pdo = null;
-?>

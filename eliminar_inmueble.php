@@ -1,4 +1,5 @@
 <?php
+include_once "cors.php";
 include_once "connection.php";
 
 // Obtener el id del inmueble desde la solicitud (por ejemplo, a través de un parámetro GET)
